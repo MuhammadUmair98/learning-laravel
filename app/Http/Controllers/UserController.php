@@ -25,12 +25,12 @@ class UserController extends Controller
         return response()->json(['data' => $user]);
     }
 
-
     public function index()
     {
         $users = User::get();
         return response()->json(['data' => $users]);
     }
+
     public function destroy(int $id)
     {
         $user = User::findOrFail($id);
