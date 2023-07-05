@@ -20,3 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/store-user', [UserController::class, 'store']);
+
+Route::get('/get-user/{id}', [UserController::class, 'show']);
+
+Route::delete('/delete-user/{id}', [UserController::class, 'destroy']);

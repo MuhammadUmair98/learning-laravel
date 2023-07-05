@@ -18,4 +18,17 @@ class UserController extends Controller
         $user = User::create($request->all());
         return response()->json(['success' => true, 'data' => $user]);
     }
+
+    public function show(int $id)
+    {
+        $user = User::findOrFail($id);
+        return response()->json(['data' => $user]);
+    }
+
+    public function destroy(int $id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return response()->json(['success' => true]);
+    }
 }
