@@ -23,8 +23,5 @@ Route::post('/store-user', [UserController::class, 'store']);
 
 Route::get('/get-user/{id}', [UserController::class, 'show']);
 
-<<<<<<< HEAD
 Route::get('/get-users', [UserController::class, 'index']);
-=======
 Route::delete('/delete-user/{id}', [UserController::class, 'destroy']);
->>>>>>> main
