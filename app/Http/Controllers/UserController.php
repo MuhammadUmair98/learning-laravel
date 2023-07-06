@@ -28,7 +28,14 @@ class UserController extends Controller
     public function index()
     {
         $users = User::get();
-        return response()->json(['data' => $users]);
+        $data = $users->map(function ($user) {
+            return [
+                'id' => $user->id,
+                'name' => $user->name,
+                'userPhones' => $user->userPhones
+            ];
+        });
+        return response()->json(['data' => $data]);
     }
 
     public function destroy(int $id)
