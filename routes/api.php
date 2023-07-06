@@ -28,3 +28,5 @@ Route::get('/get-users', [UserController::class, 'index']);
 Route::delete('/delete-user/{id}', [UserController::class, 'destroy']);
 
 Route::post('/store-user-phone', [UserPhoneController::class, 'store']);
+
+Route::get('/get-user-phones', [UserPhoneController::class, 'index']);
