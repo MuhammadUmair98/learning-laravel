@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserLaptop;
 use Illuminate\Http\Request;
 
 class UserLaptopController extends Controller
@@ -19,7 +20,19 @@ class UserLaptopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'brandName' => 'required|string',
+            'price' => 'required|integer',
+            'description' => 'required|string',
+            'usersId' => 'required|array'
+        ]);
+        $user_laptop = new UserLaptop;
+        $user_laptop->brand_name = $request->brandName;
+        $user_laptop->price = $request->price;
+        $user_laptop->description = $request->description;
+        $user_laptop->save();
+        $user_laptop->users()->sync($request->usersId);
+        return response()->json(['success' => true, 'data' => $user_laptop]);
     }
 
     /**
@@ -35,7 +48,19 @@ class UserLaptopController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'brandName' => 'required|string',
+            'price' => 'required|integer',
+            'description' => 'required|string',
+            'usersId' => 'required|array'
+        ]);
+        $user_laptop = UserLaptop::findOrFail($id);
+        $user_laptop->brand_name = $request->brandName;
+        $user_laptop->price = $request->price;
+        $user_laptop->description = $request->description;
+        $user_laptop->save();
+        $user_laptop->users()->sync($request->usersId);
+        return response()->json(['success' => true, 'data' => $user_laptop]);
     }
 
     /**
