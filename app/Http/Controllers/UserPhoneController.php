@@ -31,14 +31,15 @@ class UserPhoneController extends Controller
     }
 
 
-    public function index() {
+    public function index()
+    {
         // $user_phones = UserPhone::with('user')->get();
 
         $user_phones = UserPhone::get();
-        $data = $user_phones->map(function($user_phone){
+        $data = $user_phones->map(function ($user_phone) {
             return [
-            'name'=>$user_phone['brand_name'],
-            'user'=>$user_phone['user']
+                'name' => $user_phone['brand_name'],
+                'user' => $user_phone['user'],
             ];
         });
 
