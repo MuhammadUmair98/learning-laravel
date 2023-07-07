@@ -35,3 +35,5 @@ Route::get('/get-user-phones', [UserPhoneController::class, 'index']);
 Route::post('/store-user-laptop', [UserLaptopController::class, 'store']);
 
 Route::post('/store-user-laptop', [UserLaptopController::class, 'store']);
+
+Route::delete('/delete-user-laptop/{id}', [UserLaptopController::class, 'destroy']);

@@ -55,8 +55,11 @@ class UserLaptopController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        //
+     $user_laptop = UserLaptop::findOrFail($id);
+     $user_laptop->delete();
+
+     return response()->json(['success'=> true]);
     }
 }
