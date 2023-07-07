@@ -10,9 +10,6 @@ class UserPhoneController extends Controller
 
     public function store(Request $request_object)
     {
-        /**if (isset($requestObject->phoneType)) {
-            $requestObject->request->add(['phoneType' => strtolower($requestObject->phoneType)]);
-        } **/
         $request_object->validate([
             'brandName' => 'required|string',
             'price' => 'required|integer',

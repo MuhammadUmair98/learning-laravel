@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LaptopFormRequest;
 use App\Models\UserLaptop;
 use Illuminate\Http\Request;
 
@@ -18,14 +19,8 @@ class UserLaptopController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(LaptopFormRequest $request)
     {
-        $request->validate([
-            'brandName' => 'required|string',
-            'price' => 'required|integer',
-            'description' => 'required|string',
-            'usersId' => 'required|array'
-        ]);
         $user_laptop = new UserLaptop;
         $user_laptop->brand_name = $request->brandName;
         $user_laptop->price = $request->price;
@@ -46,14 +41,8 @@ class UserLaptopController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(LaptopFormRequest $request, string $id)
     {
-        $request->validate([
-            'brandName' => 'required|string',
-            'price' => 'required|integer',
-            'description' => 'required|string',
-            'usersId' => 'required|array'
-        ]);
         $user_laptop = UserLaptop::findOrFail($id);
         $user_laptop->brand_name = $request->brandName;
         $user_laptop->price = $request->price;
