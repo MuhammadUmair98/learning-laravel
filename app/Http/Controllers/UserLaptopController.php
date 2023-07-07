@@ -48,7 +48,7 @@ class UserLaptopController extends Controller
     public function update(LaptopFormRequest $request, string $id)
     {
         $user_laptop = UserLaptop::findOrFail($id);
-        $user_laptop = UserLaptopService::storeOrUpdateLaptop($user_laptop, $request);
+        $user_laptop = $this->user_laptop_service->storeOrUpdateLaptop($user_laptop, $request);
         return response()->json(['success' => true, 'data' => $user_laptop]);
     }
 
