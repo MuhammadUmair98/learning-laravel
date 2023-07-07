@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LaptopFormRequest;
 use App\Models\UserLaptop;
+use Facades\App\Services\UserLaptopService;
 use Illuminate\Http\Request;
 
 class UserLaptopController extends Controller
 {
+    function __construct()
+    {
+        
+    }
     /**
      * Display a listing of the resource.
      */
@@ -22,11 +27,7 @@ class UserLaptopController extends Controller
     public function store(LaptopFormRequest $request)
     {
         $user_laptop = new UserLaptop;
-        $user_laptop->brand_name = $request->brandName;
-        $user_laptop->price = $request->price;
-        $user_laptop->description = $request->description;
-        $user_laptop->save();
-        $user_laptop->users()->sync($request->usersId);
+        $user_laptop = UserLaptopService::storeOrUpdateLaptop($user_laptop, $request);
         return response()->json(['success' => true, 'data' => $user_laptop]);
     }
 
@@ -44,11 +45,7 @@ class UserLaptopController extends Controller
     public function update(LaptopFormRequest $request, string $id)
     {
         $user_laptop = UserLaptop::findOrFail($id);
-        $user_laptop->brand_name = $request->brandName;
-        $user_laptop->price = $request->price;
-        $user_laptop->description = $request->description;
-        $user_laptop->save();
-        $user_laptop->users()->sync($request->usersId);
+        $user_laptop = UserLaptopService::storeOrUpdateLaptop($user_laptop, $request);
         return response()->json(['success' => true, 'data' => $user_laptop]);
     }
 
@@ -57,9 +54,8 @@ class UserLaptopController extends Controller
      */
     public function destroy(int $id)
     {
-     $user_laptop = UserLaptop::findOrFail($id);
-     $user_laptop->delete();
-
-     return response()->json(['success'=> true]);
+        $user_laptop = UserLaptop::findOrFail($id);
+        $user_laptop->delete();
+        return response()->json(['success' => true]);
     }
 }
