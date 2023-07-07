@@ -4,20 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LaptopFormRequest;
 use App\Models\UserLaptop;
-use Facades\App\Services\UserLaptopService;
+use App\Services\UserLaptopService;
 use Illuminate\Http\Request;
 
 class UserLaptopController extends Controller
 {
-    function __construct()
+
+    private $user_laptop_service;
+    function __construct(UserLaptopService $userLaptopService)
     {
-        
+        $this->user_laptop_service = $userLaptopService;
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+
         //
     }
 
@@ -27,7 +30,7 @@ class UserLaptopController extends Controller
     public function store(LaptopFormRequest $request)
     {
         $user_laptop = new UserLaptop;
-        $user_laptop = UserLaptopService::storeOrUpdateLaptop($user_laptop, $request);
+        $user_laptop = $this->user_laptop_service->storeOrUpdateLaptop($user_laptop, $request);
         return response()->json(['success' => true, 'data' => $user_laptop]);
     }
 
