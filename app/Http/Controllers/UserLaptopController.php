@@ -45,7 +45,7 @@ class UserLaptopController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(LaptopFormRequest $request, string $id)
+    public function update(LaptopFormRequest $request, int $id)
     {
         $user_laptop = UserLaptop::findOrFail($id);
         $user_laptop = $this->user_laptop_service->storeOrUpdateLaptop($user_laptop, $request);
