@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserPhone::class, 'user_id');
     }
+
+    public function userLaptops()
+    {
+        return $this->belongsToMany(UserLaptop::class, 'user_laptops_pivot', 'user_id', 'user_laptop_id');
+    }
 }

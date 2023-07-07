@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserLaptopController;
+use App\Http\Controllers\UserPhoneController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +27,13 @@ Route::get('/get-user/{id}', [UserController::class, 'show']);
 
 Route::get('/get-users', [UserController::class, 'index']);
 Route::delete('/delete-user/{id}', [UserController::class, 'destroy']);
+
+Route::post('/store-user-phone', [UserPhoneController::class, 'store']);
+
+Route::get('/get-user-phones', [UserPhoneController::class, 'index']);
+
+Route::post('/store-user-laptop', [UserLaptopController::class, 'store']);
+
+Route::post('/store-user-laptop', [UserLaptopController::class, 'store']);
+
+Route::delete('/delete-user-laptop/{id}', [UserLaptopController::class, 'destroy']);

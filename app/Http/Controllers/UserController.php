@@ -12,7 +12,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8'
         ]);
         $user = User::create($request->all());
@@ -25,16 +25,27 @@ class UserController extends Controller
         return response()->json(['data' => $user]);
     }
 
-
     public function index()
     {
         $users = User::get();
-        return response()->json(['data' => $users]);
+        $data = $users->map(function ($user) {
+            return [
+                'id' => $user->id,
+                'name' => $user->name,
+                'userPhones' => $user->userPhones
+            ];
+        });
+        return response()->json(['data' => $data]);
     }
+
     public function destroy(int $id)
     {
         $user = User::findOrFail($id);
+        if (isset($user->userPhones)) {
+            $user->userPhones()->delete();
+        }
         $user->delete();
+
         return response()->json(['success' => true]);
     }
 }
