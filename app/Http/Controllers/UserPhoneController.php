@@ -12,12 +12,10 @@ class UserPhoneController extends Controller
 
     private $user_phone_service;
 
-    function __construct(UserPhoneService $userPhoneService){
+    function __construct(UserPhoneService $userPhoneService)
+    {
         $this->user_phone_service = $userPhoneService;
     }
-
-
-
 
     public function store(PhoneFormRequest $request)
     {

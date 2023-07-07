@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LaptopFormRequest;
+use App\Http\Resources\UserLaptopResource;
 use App\Models\UserLaptop;
 use App\Services\UserLaptopService;
 use Illuminate\Http\Request;
@@ -20,8 +21,8 @@ class UserLaptopController extends Controller
      */
     public function index()
     {
-
-        //
+        $user_laptops = UserLaptop::get();
+        return response()->json(['data' => UserLaptopResource::collection($user_laptops)]);
     }
 
     /**
@@ -39,7 +40,8 @@ class UserLaptopController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user_laptop = UserLaptop::findOrFail($id);
+        return response()->json(['data' => new UserLaptopResource($user_laptop)]);
     }
 
     /**
