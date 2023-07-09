@@ -40,8 +40,8 @@ class UserPhoneController extends Controller
         $user_phones = UserPhone::get();
         $data = $user_phones->map(function ($user_phone) {
             return [
-                'name' => $user_phone['brand_name'],
-                'user' => $user_phone['user'],
+                'name' => $user_phone->brand_name,
+                'user' => $user_phone->user
             ];
         });
 

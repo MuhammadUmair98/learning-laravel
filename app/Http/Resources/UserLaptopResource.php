@@ -17,6 +17,7 @@ class UserLaptopResource extends JsonResource
         return [
             'brandName' => $this->brand_name,
             'price' => $this->price,
+            'charger' => $this->laptopCharger
         ];
     }
 }
