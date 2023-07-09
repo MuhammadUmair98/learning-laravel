@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PhoneFormRequest;
+use App\Models\UserCharger;
 use App\Models\UserPhone;
 use App\Services\UserPhoneService;
 use Illuminate\Http\Request;
@@ -45,5 +46,20 @@ class UserPhoneController extends Controller
         });
 
         return response()->json(['data' => $data]);
+    }
+
+
+    public function storeCharger(Request $request)
+    {
+        $request->validate([
+            "phoneId" => 'required|exists:user_phones,id',
+            "name" => 'required|string',
+        ]);
+
+        $user_phone = UserPhone::find($request->phoneId);
+        $user_charger = new UserCharger();
+        $user_charger->name = $request->name;
+        $user_phone->phoneCharger()->save($user_charger);
+        return response()->json(['success' => true, 'data' => $user_charger]);
     }
 }

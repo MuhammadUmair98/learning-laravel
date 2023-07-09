@@ -19,4 +19,11 @@ class UserPhone extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+
+    public function phoneCharger()
+    {
+
+        return $this->morphMany(UseCharger::class, 'chargeable');
+    }
 }

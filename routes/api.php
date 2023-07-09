@@ -43,3 +43,5 @@ Route::get('/get-laptops', [UserLaptopController::class, 'index']);
 Route::get('/get-laptop/{id}', [UserLaptopController::class, 'show']);
 
 Route::post('/store-charger', [UserLaptopController::class, 'storeCharger']);
+
+Route::post('/store-phone-charger', [UserPhoneController::class, 'storeCharger']);
