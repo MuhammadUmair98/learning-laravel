@@ -24,6 +24,6 @@ class UserPhone extends Model
     public function phoneCharger()
     {
 
-        return $this->morphMany(UseCharger::class, 'chargeable');
+        return $this->morphMany(UserCharger::class, 'chargeable');
     }
 }
