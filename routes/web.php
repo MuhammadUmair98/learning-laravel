@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/home', function () {
-    return view('welcome');
+    return view('welcome', ['data' => ['name' => 'umair']]);
 });
 
-Route::get('/new-home', function () {
-    return view('welcomeagain');
-});
+Route::get('/new-home', [UserController::class, 'index']);

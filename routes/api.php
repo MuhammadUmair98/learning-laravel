@@ -41,3 +41,5 @@ Route::delete('/delete-user-laptop/{id}', [UserLaptopController::class, 'destroy
 Route::get('/get-laptops', [UserLaptopController::class, 'index']);
 
 Route::get('/get-laptop/{id}', [UserLaptopController::class, 'show']);
+
+Route::post('/store-charger', [UserLaptopController::class, 'storeCharger']);
