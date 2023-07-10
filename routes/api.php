@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserLaptopController;
 use App\Http\Controllers\UserPhoneController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,16 @@ Route::get('/get-user/{id}', [UserController::class, 'show']);
 
 Route::get('/get-users', [UserController::class, 'index']);
 Route::delete('/delete-user/{id}', [UserController::class, 'destroy']);
+
+Route::post('/login', [UserController::class, 'login']);
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/me', function (Request $request) {
+        return response()->json(['user' =>  $request->user()]);
+    });
+});
+
 
 Route::post('/store-user-phone', [UserPhoneController::class, 'store']);
 

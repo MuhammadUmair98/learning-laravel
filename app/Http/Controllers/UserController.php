@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -18,7 +19,7 @@ class UserController extends Controller
             'password' => 'required|min:8'
         ]);
         $user = User::create($request->all());
-        return response()->json(['success' => true, 'data' => $user]);
+        return response()->json(['success' => true, 'data' => $user, 'token' => $user->createToken('access_token')]);
     }
 
     public function show(int $id)
@@ -49,5 +50,19 @@ class UserController extends Controller
         $user->delete();
 
         return response()->json(['success' => true]);
+    }
+
+
+    public function login(Request $request)
+    {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = Auth::user();
+            $success['token'] =  $user->createToken('access_token')->plainTextToken;
+            $success['name'] =  $user->name;
+
+            return response()->json(['Authenticated' => true, 'success' => $success]);
+        } else {
+            return response()->json(['Authenticated' => false]);
+        }
     }
 }
