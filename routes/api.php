@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserLaptopController;
 use App\Http\Controllers\UserPhoneController;
+use App\Http\Controllers\WeatherController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
+Route::post('/control-weather', WeatherController::class);
 
 Route::post('/store-user-phone', [UserPhoneController::class, 'store']);
 
