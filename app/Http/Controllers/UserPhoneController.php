@@ -43,10 +43,12 @@ class UserPhoneController extends Controller
                 'name' => $user_phone->brand_name,
                 'user' => $user_phone->user,
                 'id' => $user_phone->id,
+                'price' => $user_phone->price,
+                'description' => $user_phone->description
             ];
         });
 
-        return response()->json(['data' => $data]);
+        return response()->json(['data' => $data, 'countRecords' => $data->count()]);
     }
 
 
